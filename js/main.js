@@ -1,12 +1,21 @@
 "use strict";
+window.onload=function(){
 
-
- window.onload=function(){
-     let h2=document.querySelector("h2");
-     h2.classList.remove("d-none");
-     let table=document.querySelector("table");
-     let thead=document.querySelector("thead");
-     let tbody=document.querySelector("tbody");
+    let h2=document.querySelector("h2");
+    let button=document.querySelector("button");
+    
+    let table=document.querySelector("table");
+    let thead=document.querySelector("thead");
+    let tbody=document.querySelector("tbody");
+    let select=document.querySelector("select");
+ button.onclick=function(){
+     let cityNo=select.value;
+     if(cityNo>0){
+        h2.classList.remove("d-none");
+     }
+     
+     tbody.innerHTML=""
+    
      let http=new XMLHttpRequest;
      http.onreadystatechange=function(){
          if(http.readyState===4 && http.status===200){
@@ -56,6 +65,6 @@
                 });
          }
      }
-     http.open("GET","http://api.openweathermap.org/data/2.5/forecast?id=587084&APPID=ad13347afe18e1b76716899dc1747aa8&cnt=128");
+     http.open("GET",`http://api.openweathermap.org/data/2.5/forecast?id=${cityNo}&APPID=ad13347afe18e1b76716899dc1747aa8&cnt=128`);
      http.send();
- }
+ }}
